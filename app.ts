@@ -11,6 +11,7 @@ import * as http from 'http';
 
 // application logger
 import logger from './logging';
+import {DefaultResource} from "./routes";
 
 class App {
 
@@ -55,6 +56,7 @@ class App {
         /**
          * Define the routes for the app
          **/
+        new DefaultResource(this.app);
     }
 
     public startAppServer() {
