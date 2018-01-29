@@ -1,0 +1,20 @@
+# Logs
+logs
+*.log
+
+# IntelliJ files
+*.iml
+.idea
+
+# External modules
+node_modules
+
+# NPM files
+package-lock.json
+
+# Typescript compiled files
+#**/*.js
+**/*.js.map
+
+# Sample nodejs code
+lynda/**/*.*
