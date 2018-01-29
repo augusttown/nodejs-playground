@@ -13,8 +13,8 @@ node_modules
 package-lock.json
 
 # Typescript compiled files
-#**/*.js
+**/*.js
 **/*.js.map
 
 # Sample nodejs code
-lynda/**/*.*
+lynda

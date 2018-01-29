@@ -1,0 +1,34 @@
+{
+  "server": {
+    "port": 3000
+  },
+  "logging": {
+    "accessLogs": {
+      "filename": "access.log",
+      "config": {
+        "interval": "1d",
+        "path": "logs"
+      }
+    },
+    "appLogs": {
+      "file": {
+        "filename": "logs/nodejs-playground-",
+        "handleExceptions": true,
+        "json": true,
+        "colorize": false,
+        "datePattern": "yyyy-MM-dd.log"
+      },
+      "console": {
+        "handleExceptions": true,
+        "json": false,
+        "colorize": true
+      }
+    }
+  },
+  "app": {
+    // app config
+  },
+  "database": {
+    // db config
+  }
+}

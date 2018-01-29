@@ -1,0 +1,8 @@
+{
+  "app": {
+    // overwrites app config
+  },
+  "database": {
+    // overwrites db config
+  }
+}
