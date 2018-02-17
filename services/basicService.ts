@@ -14,6 +14,16 @@ export class BasicService {
     private static CONSTANT: number = 100;
     private data: string[];
 
+    public static getCurrentTimeStamp(): string {
+        var date = new Date();
+        var timeStamp = date.toLocaleDateString() + "::" + date.toLocaleTimeString();
+        return timeStamp;
+    }
+
+    public static getConstant(): number {
+        return this.CONSTANT;
+    }
+
     public getData(): string[] {
         return this.data;
     }
@@ -22,7 +32,5 @@ export class BasicService {
         this.data = data;
     }
 
-    public static getConstant(): number {
-        return this.CONSTANT;
-    }
+
 }

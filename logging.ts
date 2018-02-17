@@ -6,14 +6,14 @@ class Logging {
     private logger;
 
     constructor() {
-        let defaultLoggingLevel = (process.env.ENV === 'qa') ? 'debug' : 'info';
+        let defaultLoggingLevel = (process.env.ENV === 'dev') ? 'debug' : 'info';
         let loggerTransports = [];
         let logFileConfig = config.get('logging.appLogs.file');
         if(!logFileConfig['level']) {
             logFileConfig['level'] = defaultLoggingLevel;
         }
         loggerTransports.push(new winston.transports.DailyRotateFile(logFileConfig));
-        if(process.env.NODE_ENV === 'qa') {
+        if(process.env.NODE_ENV === 'dev') {
             let logConsoleConfig = config.get('logging.appLogs.console');
             if(!logConsoleConfig['level']) {
                 logConsoleConfig['level'] = defaultLoggingLevel;

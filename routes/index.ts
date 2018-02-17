@@ -5,6 +5,7 @@ import logger from '../logging';
 import * as config from 'config';
 import * as validator from 'validator';
 import {Application} from "express";
+import {BasicService} from '../services/basicService';
 
 
 export class DefaultResource {
@@ -16,7 +17,9 @@ export class DefaultResource {
     private setupRoutes() {
 
         this.app.get('/index', function(req, res) {
-            res.render('index', {});
+            let timeStamp = BasicService.getCurrentTimeStamp();
+            logger.info(timeStamp);
+            res.render('index', { timeStamp: timeStamp });
         });
 
     }
