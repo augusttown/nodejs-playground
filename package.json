@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "compile": "tsc",
+    "test": "cross-env NODE_ENV=qa jasmine" // same as node_modules/.bin/jasmine under root project folder
   },
   "dependencies": {
     "body-parser": "~1.17.1",
