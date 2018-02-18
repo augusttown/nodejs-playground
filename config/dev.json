@@ -3,6 +3,11 @@
     // overwrites app config
   },
   "database": {
-    // overwrites db config
+    "connection": {
+      "host": "localhost",
+      "database": "playground_database",
+      "username": "web_app",
+      "password": "web_app"
+    }
   }
 }

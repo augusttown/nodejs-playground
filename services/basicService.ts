@@ -8,6 +8,8 @@ import logger from '../logging';
 import * as config from 'config';
 import * as _ from 'lodash';
 import * as validator from 'validator';
+import * as dataSources from '../datasources';
+import {Person} from "../models/person";
 
 export class BasicService {
 
@@ -22,6 +24,28 @@ export class BasicService {
 
     public static getConstant(): number {
         return this.CONSTANT;
+    }
+
+    public static testPlaygroundDataSource(): boolean {
+        let isConnected = false;
+        let dataSource = dataSources.getPlaygroundDataSource();
+        if (dataSource) {
+            isConnected = true;
+        }
+        return isConnected;
+    }
+
+    public static getPersonCount() {
+        let dataSource = dataSources.getPlaygroundDataSource();
+        if(dataSource) {
+            dataSource.addModels([Person]);
+            let query = {
+                //where: {}
+            };
+            return Person.count(query);
+        } else {
+            return null;
+        }
     }
 
     public getData(): string[] {
