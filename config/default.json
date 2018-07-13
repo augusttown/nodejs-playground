@@ -1,6 +1,6 @@
 {
   "server": {
-    "port": 3000
+    "port": 3449
   },
   "logging": {
     "accessLogs": {
@@ -29,7 +29,6 @@
     // app config
   },
   "database": {
-    //"databaseName": "playground_database",
     "connection": {
       "dialect": "mssql",
       "timezone": "",

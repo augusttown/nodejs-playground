@@ -5,9 +5,9 @@
   "database": {
     "connection": {
       "host": "localhost",
-      "database": "playground_database",
-      "username": "web_app",
-      "password": "web_app"
+      "database": "playground",
+      "username": "playground_app",
+      "password": "playground_app"
     }
   }
 }

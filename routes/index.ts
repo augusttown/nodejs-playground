@@ -5,19 +5,19 @@ import logger from '../logging';
 import * as config from 'config';
 import * as _ from 'lodash';
 import * as validator from 'validator';
-import {Application} from "express";
+import {Application, Router} from "express";
 import {BasicService} from '../services/basicService';
 
 
 export class DefaultResource {
 
-    constructor(public app: Application) {
+    constructor(public app: Application, protected router: Router) {
         this.setupRoutes();
     }
 
     private setupRoutes() {
-
-        this.app.get('/index', function(req, res) {
+        //
+        this.router.get('/index', function(req, res) {
             let timeStamp = BasicService.getCurrentTimeStamp();
             logger.info(timeStamp);
             let isPlaygroundDbConnected = BasicService.testPlaygroundDataSource();
@@ -27,8 +27,8 @@ export class DefaultResource {
                 dbStatus: isPlaygroundDbConnected
             });
         });
-
-        this.app.get('/person', function(req, res) {
+        //
+        this.router.get('/person', function(req, res) {
             let isPromise = BasicService.getPersonCount();
             if(isPromise) {
                 isPromise.then((count) => {
@@ -51,6 +51,5 @@ export class DefaultResource {
                 res.status(500).send("Could not find data source");
             }
         });
-
     }
 }

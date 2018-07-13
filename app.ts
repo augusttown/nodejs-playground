@@ -56,7 +56,11 @@ class App {
         /**
          * Define the routes for the app
          **/
-        new DefaultResource(this.app);
+        let router = express.Router();
+
+        new DefaultResource(this.app, router);
+
+        this.app.use("/nodejs-playground-ws", router);
     }
 
     public startAppServer() {
