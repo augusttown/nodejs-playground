@@ -11,7 +11,13 @@ import * as http from 'http';
 
 // application logger
 import logger from './logging';
-import {DefaultResource} from "./routes";
+import * as dataSources from './datasources';
+import * as sessionSequelize from "connect-session-sequelize";
+import * as session from 'express-session';
+import {AuthService} from "./services/authService";
+import {Session} from "./models/session";
+import {AuthResource} from "./routes/authResource";
+import {TestResource} from "./routes/testResource";
 
 class App {
 
@@ -38,7 +44,6 @@ class App {
         if(!fs.existsSync(accessLogPath)) {
             fs.mkdirSync(accessLogPath);
         }
-
         let accessLogStream = rfs(accessLogFileName, accessLogConfig);
         this.app.use(morgan('combined', {stream: accessLogStream}));
         this.app.use(morgan('dev'));
@@ -50,6 +55,40 @@ class App {
         // view engine setup
         this.app.set('views', path.join(__dirname, 'views'));
         this.app.set('view engine', 'pug');
+
+        // Initialize sequelize with session store.  The persistent session store is required
+        // for the Keycloak session establishment handshake.
+        let SequelizeStore = sessionSequelize(session.Store);
+
+        let dataSource = dataSources.getPlaygroundDataSource();
+        dataSource.addModels([Session]);
+
+        let sessionStore = new SequelizeStore({
+            db: dataSource,
+            table: 'Session'
+        });
+
+        // Setup proxy settings for Express app
+        this.app.set('trust proxy', 'loopback');
+
+        // Setup the session store
+        this.app.use(session({
+            secret: config.get('app.sessionSecret'),
+            cookie: {
+                secure: config.get('app.secure'),
+                httpOnly: true
+            },
+            proxy: true,
+            resave: false,
+            saveUninitialized: true,
+            store: sessionStore
+        }));
+
+        let keycloak = AuthService.setupKeyCloakInstance(sessionStore);
+
+        // Setup the Keycloak middleware to handle the authentication of the user session.
+
+        this.app.use(keycloak.middleware());
     }
 
     private setupRoutes() {
@@ -58,7 +97,8 @@ class App {
          **/
         let router = express.Router();
 
-        new DefaultResource(this.app, router);
+        new AuthResource(this.app, router);
+        new TestResource(this.app, router);
 
         this.app.use("/nodejs-playground-ws", router);
     }

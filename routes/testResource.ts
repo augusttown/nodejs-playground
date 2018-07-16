@@ -7,15 +7,12 @@ import * as _ from 'lodash';
 import * as validator from 'validator';
 import {Application, Router} from "express";
 import {BasicService} from '../services/basicService';
+import {BaseResource} from "./baseResource";
 
 
-export class DefaultResource {
+export class TestResource extends BaseResource {
 
-    constructor(public app: Application, protected router: Router) {
-        this.setupRoutes();
-    }
-
-    private setupRoutes() {
+    protected setupRoutes() {
         //
         this.router.get('/index', function(req, res) {
             let timeStamp = BasicService.getCurrentTimeStamp();

@@ -26,7 +26,8 @@
     }
   },
   "app": {
-    // app config
+    "sessionSecret": "Playground",
+    "secure": true
   },
   "database": {
     "connection": {
@@ -41,5 +42,12 @@
         "idle": 10000
       }
     }
+  },
+  "auth" : {
+    "realm": "Playground",
+    "ssl-required": "external",
+    "resource": "nodejs-playground-ws",
+    "use-resource-role-mappings": true,
+    "confidential-port": 0
   }
 }

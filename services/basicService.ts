@@ -3,11 +3,6 @@
 /**
  *
  */
-
-import logger from '../logging';
-import * as config from 'config';
-import * as _ from 'lodash';
-import * as validator from 'validator';
 import * as dataSources from '../datasources';
 import {Person} from "../models/person";
 
