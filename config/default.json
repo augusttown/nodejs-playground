@@ -47,7 +47,7 @@
     "realm": "Playground",
     "ssl-required": "external",
     "resource": "nodejs-playground-ws",
-    "use-resource-role-mappings": true,
+    //"use-resource-role-mappings": true,
     "confidential-port": 0
   }
 }

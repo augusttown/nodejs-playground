@@ -17,7 +17,7 @@ export class AuthResource extends BaseResource {
          */
         this.router.get('/login', keycloak.protect(), function(req, res) {
             res.set('Content-Type', 'text/html');
-            res.redirect(req.query.target);
+            res.redirect("http://localhost/nodejs-playground-web/index.html");
         });
 
         // All routes after this point require a valid session to be invoked.

@@ -18,6 +18,7 @@ import {AuthService} from "./services/authService";
 import {Session} from "./models/session";
 import {AuthResource} from "./routes/authResource";
 import {TestResource} from "./routes/testResource";
+import {BasicService} from "./services/basicService";
 
 class App {
 
@@ -58,7 +59,7 @@ class App {
 
         // Initialize sequelize with session store.  The persistent session store is required
         // for the Keycloak session establishment handshake.
-        let SequelizeStore = sessionSequelize(session.Store);
+        /*let SequelizeStore = sessionSequelize(session.Store);
 
         let dataSource = dataSources.getPlaygroundDataSource();
         dataSource.addModels([Session]);
@@ -82,8 +83,17 @@ class App {
             resave: false,
             saveUninitialized: true,
             store: sessionStore
+        }));*/
+
+        let sessionStore = new session.MemoryStore();
+        this.app.use(session({
+            secret: config.get('app.sessionSecret'),
+            resave: false,
+            saveUninitialized: true,
+            store: sessionStore
         }));
 
+        //
         let keycloak = AuthService.setupKeyCloakInstance(sessionStore);
 
         // Setup the Keycloak middleware to handle the authentication of the user session.

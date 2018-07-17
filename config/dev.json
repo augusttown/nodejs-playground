@@ -3,7 +3,7 @@
     // overwrites app config
   },
   "auth": {
-    "auth-server-url": "http://localhost:9080/auth",
+    "auth-server-url": "http://localhost/auth",
     "credentials": {
       "secret": "3aeacf4e-4e16-4ed5-a9d2-18d0e7a2daec"
     }
