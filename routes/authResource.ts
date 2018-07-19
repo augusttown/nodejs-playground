@@ -7,6 +7,7 @@
 import logger from '../logging';
 import {AuthService} from '../services/authService';
 import {BaseResource} from "./baseResource";
+import {UserAccess} from "../services/security/userAccess";
 
 export class AuthResource extends BaseResource {
     protected setupRoutes() {
@@ -22,6 +23,9 @@ export class AuthResource extends BaseResource {
          * Endpoint to display the login screen.  If enabled, this is a local login screen.
          */
         this.router.get('/login', keycloak.protect(), function(req, res) {
+            // Determine what access an authenticated user has
+            let userAccess = new UserAccess(req);
+            //
             res.set('Content-Type', 'text/html');
             res.redirect(req.query.target);
         });
