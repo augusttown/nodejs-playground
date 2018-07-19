@@ -5,7 +5,7 @@
   "auth": {
     "auth-server-url": "http://localhost/auth",
     "credentials": {
-      "secret": "3aeacf4e-4e16-4ed5-a9d2-18d0e7a2daec"
+      "secret": "93f91bc9-03ae-4d7f-9f99-fd158e13eab7"
     }
   },
   "database": {

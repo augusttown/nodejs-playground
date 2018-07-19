@@ -92,13 +92,12 @@ class App {
             saveUninitialized: true,
             store: sessionStore
         }));
-
         //
         let keycloak = AuthService.setupKeyCloakInstance(sessionStore);
-
+        //
         // Setup the Keycloak middleware to handle the authentication of the user session.
-
-        this.app.use(keycloak.middleware());
+        //this.app.use(keycloak.middleware());
+        this.app.use(keycloak.middleware({logout: '/nodejs-playground-ws/logout'}));
     }
 
     private setupRoutes() {
