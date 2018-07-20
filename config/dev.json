@@ -1,6 +1,7 @@
 {
   "app": {
     // overwrites app config
+    "secure": false
   },
   "auth": {
     "auth-server-url": "http://localhost/auth",

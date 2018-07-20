@@ -60,16 +60,17 @@ class App {
 
         // Initialize sequelize with session store.  The persistent session store is required
         // for the Keycloak session establishment handshake.
-        /*let SequelizeStore = sessionSequelize(session.Store);
+        let SequelizeStore = sessionSequelize(session.Store);
 
         let dataSource = dataSources.getPlaygroundDataSource();
         dataSource.addModels([Session]);
 
         let sessionStore = new SequelizeStore({
             db: dataSource,
-            table: 'Session'
+            table: 'Session'    // this the Session model name not the actual table name
         });
 
+        // TODO: what's this for?
         // Setup proxy settings for Express app
         this.app.set('trust proxy', 'loopback');
 
@@ -77,22 +78,24 @@ class App {
         this.app.use(session({
             secret: config.get('app.sessionSecret'),
             cookie: {
-                secure: config.get('app.secure'),
+                secure: config.get('app.secure'),   // https://github.com/expressjs/session#cookiesecure
                 httpOnly: true
             },
             proxy: true,
             resave: false,
             saveUninitialized: true,
             store: sessionStore
-        }));*/
+        }));
 
-        let sessionStore = new session.MemoryStore();
+        // use memory session store
+        /*let sessionStore = new session.MemoryStore();
         this.app.use(session({
             secret: config.get('app.sessionSecret'),
             resave: false,
             saveUninitialized: true,
             store: sessionStore
-        }));
+        }));*/
+
         //
         let keycloak = AuthService.setupKeyCloakInstance(sessionStore);
         //
