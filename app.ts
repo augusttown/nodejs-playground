@@ -17,6 +17,7 @@ import * as session from 'express-session';
 import {AuthService} from "./services/authService";
 import {Session} from "./models/session";
 import {AuthResource} from "./routes/authResource";
+import {SessionResource} from "./routes/sessionResource";
 import {TestResource} from "./routes/testResource";
 import {BasicService} from "./services/basicService";
 
@@ -107,6 +108,7 @@ class App {
         let router = express.Router();
 
         new AuthResource(this.app, router);
+        new SessionResource(this.app, router);
         new TestResource(this.app, router);
 
         this.app.use("/nodejs-playground-ws", router);
