@@ -5,10 +5,10 @@ import logger from '../logging';
 import * as config from 'config';
 import * as _ from 'lodash';
 import * as validator from 'validator';
-import {Application, Router} from "express";
 import {BasicService} from '../services/basicService';
+import {SecurityService} from '../services/security/securityService';
 import {BaseResource} from "./baseResource";
-
+import {UserAccess} from "../services/security/userAccess";
 
 export class TestResource extends BaseResource {
 
@@ -18,10 +18,13 @@ export class TestResource extends BaseResource {
             let timeStamp = BasicService.getCurrentTimeStamp();
             logger.info(timeStamp);
             let isPlaygroundDbConnected = BasicService.testPlaygroundDataSource();
+            let userAccess = new UserAccess(req);
 
             res.render('index', {
                 timeStamp: timeStamp,
-                dbStatus: isPlaygroundDbConnected
+                dbStatus: isPlaygroundDbConnected,
+                user: userAccess.userId,
+                trackId: config.get('app.trackId')
             });
         });
         //

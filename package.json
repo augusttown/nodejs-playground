@@ -35,7 +35,8 @@
     "uuid": "^3.2.1",
     "validator": "^8.2.0",
     "winston": "^2.3.1",
-    "winston-daily-rotate-file": "^1.4.6"
+    "winston-daily-rotate-file": "^1.4.6",
+    "xss-filters": "^1.2.7"
   },
   "devDependencies": {
     "@types/config": "^0.0.33",

@@ -27,7 +27,8 @@
   },
   "app": {
     "sessionSecret": "Playground",
-    "secure": true
+    "secure": true,
+    "trackId": "UA-131049606-3"
   },
   "database": {
     "connection": {

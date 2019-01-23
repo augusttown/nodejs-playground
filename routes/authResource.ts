@@ -25,6 +25,7 @@ export class AuthResource extends BaseResource {
         this.router.get('/login', keycloak.protect(), function(req, res) {
             // Determine what access an authenticated user has
             let userAccess = new UserAccess(req);
+            logger.info("User: " + userAccess.userId + " logged in");
             //
             res.set('Content-Type', 'text/html');
             res.redirect(req.query.target);
@@ -43,8 +44,10 @@ export class AuthResource extends BaseResource {
                     delete req.kauth.grant;
                     logger.info("Keycloak session ended");
                 }
+                //
                 res.redirect(logoutUrl);
             });
         });
+
     }
 }
